@@ -44,6 +44,13 @@ async function run() {
      const result= await cursor.toArray();
      res.send(result);
     })
+
+    const All_ToysCollection =client.db('Toy-Trove').collection('All_Toys');
+    app.get('/all_toys', async (req, res) => {
+     const cursor=All_ToysCollection.find();
+     const result= await cursor.toArray();
+     res.send(result);
+    })
   
 
     // Send a ping to confirm a successful connection
