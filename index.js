@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors =require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const { ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 
@@ -50,6 +51,18 @@ async function run() {
      const cursor=toyCollection.find();
      const result= await cursor.toArray();
      res.send(result);
+    })
+
+
+    app.get('/toy/:_id', async (req, res) => {
+      const _id=req.params._id;
+      const query={_id: new ObjectId(_id)}
+
+      // const option={
+      //   projection:{Picture:1, ToyName:1, SellerName:1, SellerEmail:1, price:1, rating:1,  AvailableQuantity:1,Description:1}
+      // }
+       const result =await toyCollection.findOne(query);
+       res.send(result);
     })
   
 
