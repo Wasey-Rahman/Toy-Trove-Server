@@ -97,6 +97,9 @@ async function run() {
     });
 
 
+    
+
+
     const Toy_SCollection =client.db('Toy-Trove').collection('Toy_S');
     app.get('/Toy_S', async (req, res) => {
      const cursor=Toy_SCollection.find();
