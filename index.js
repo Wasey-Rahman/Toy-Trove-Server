@@ -64,6 +64,19 @@ async function run() {
        const result =await toyCollection.findOne(query);
        res.send(result);
     })
+
+
+    const Add_A_ToyCollection=client.db('Toy-Trove').collection('Add_A_Toy');
+    app.post('/Add_A_Toy',async(req,res)=>{
+      
+        const add_A_toy=req.body;
+        console.log(add_A_toy);
+        const result=await Add_A_ToyCollection.insertOne(add_A_toy);
+        res.send(result);
+  
+  
+        
+    });
   
 
     // Send a ping to confirm a successful connection
