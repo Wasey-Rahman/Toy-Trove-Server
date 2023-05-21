@@ -67,6 +67,24 @@ async function run() {
 
 
     const Add_A_ToyCollection=client.db('Toy-Trove').collection('Add_A_Toy');
+
+
+    app.get('/Add_A_Toy', async (req, res) => {
+      console.log(req.query.email);
+      let query={};
+      if(req.query?.email){
+        query={ email: req.query.email}
+        
+      }
+     
+      const result= await Add_A_ToyCollection.find(query).toArray();
+      res.send(result);
+    })
+
+
+    
+
+
     app.post('/Add_A_Toy',async(req,res)=>{
       
         const add_A_toy=req.body;
@@ -77,6 +95,26 @@ async function run() {
   
         
     });
+
+
+    const Toy_SCollection =client.db('Toy-Trove').collection('Toy_S');
+    app.get('/Toy_S', async (req, res) => {
+     const cursor=Toy_SCollection.find();
+     const result= await cursor.toArray();
+     res.send(result);
+    });
+
+    app.get('/Toy_S/:_id', async (req, res) => {
+      const _id=req.params._id;
+      const query={_id: new ObjectId(_id)}
+
+      // const option={
+      //   projection:{Picture:1, ToyName:1, SellerName:1, SellerEmail:1, price:1, rating:1,  AvailableQuantity:1,Description:1}
+      // }
+       const result =await Toy_SCollection.findOne(query);
+       res.send(result);
+    });
+
   
 
     // Send a ping to confirm a successful connection
